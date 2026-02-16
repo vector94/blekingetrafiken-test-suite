@@ -1,0 +1,329 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{float}
+
+% Listing style for test log
+\lstdefinestyle{testlog}{
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    xleftmargin=2pt,
+    xrightmargin=2pt,
+    aboveskip=8pt,
+    belowskip=8pt
+}
+
+% Page geometry - A4, 1 inch margins
+\geometry{a4paper, margin=1in}
+\setlength{\headheight}{15pt}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+}
+
+\begin{document}
+
+% ============================================
+% TITLE PAGE
+% ============================================
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    \includegraphics[width=0.3\textwidth]{images/bth_logo.png}
+
+    \vspace{2cm}
+    {\Huge\bfseries Automated GUI-Based Testing\\of Blekingetrafiken.se\par}
+
+    \vspace{1cm}
+    {\LARGE Assignment 2\par}
+
+    \vspace{1.5cm}
+    {\large PA2552 VT26\par}
+    \vspace{0.3cm}
+    {\large Software Testing\par}
+
+    \vspace{2cm}
+    \begin{tabular}{ll}
+        \textbf{Author:} & Md Asif Iqbal Ahmed \\
+        \textbf{Submission Date:} & February 16, 2026 \\
+    \end{tabular}
+
+    \vfill
+    {\large Blekinge Institute of Technology\par}
+    {\large Karlskrona, Sweden\par}
+\end{titlepage}
+
+% ============================================
+% PAGE STYLE SETUP
+% ============================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{PA2552 - Software Testing}
+\fancyhead[R]{Assignment 2}
+\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ============================================
+% SECTION 1: INTRODUCTION
+% ============================================
+\section{Introduction}
+
+This report describes the automated GUI test suite built for \textbf{Blekingetrafiken.se}, the public transport website for Blekinge, Sweden. The test suite covers 10 feature requirements using Selenium WebDriver with C\# and the NUnit test framework.
+
+\textbf{Technology Stack:}
+\begin{itemize}
+    \item \textbf{Language:} C\# (.NET 8.0)
+    \item \textbf{Test Framework:} NUnit 3
+    \item \textbf{Browser Automation:} Selenium WebDriver 4.40
+    \item \textbf{Browser:} Google Chrome
+\end{itemize}
+
+% ============================================
+% SECTION 2: FEATURE REQUIREMENTS
+% ============================================
+\section{Feature Requirements}
+
+\subsection{US1: Journey Planning}
+\textbf{User Story:} As a traveler, I want to search for a journey between two locations with time options, so that I can plan my trip using public transport.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The home page displays a journey planner with ``Fr\aa n'' (From) and ``Till'' (To) input fields
+    \item A time selection section (``N\"ar vill du \aa ka?'') is visible
+\end{itemize}
+
+\subsection{US2: Extended Journey Search}
+\textbf{User Story:} As a traveler, I want to access the journey search from the travel information section, so that I can search for trips beyond the home page.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The journey search page provides ``Fr\aa n'' and ``Till'' input fields along with a ``S\"ok'' button
+    \item An extended search page is accessible at \texttt{/reseinformation/sok-resa/} and loads successfully
+\end{itemize}
+
+\subsection{US3: Traffic Information}
+\textbf{User Story:} As a traveler, I want to check current service disruptions and delays, so that I can update my travel plans.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The traffic information page shows keywords about service disruptions (e.g., ``trafikl\"age'', ``st\"orning'', ``f\"orsening'')
+    \item The page has an external link to Trafikverket for live rail traffic updates
+\end{itemize}
+
+\subsection{US4: Stop/Station Search}
+\textbf{User Story:} As a traveler, I want to search for bus and train stops by name, so that I can find station information for my location.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The stations page lists at least 3 stations
+    \item Known stations such as Karlskrona and Ronneby are displayed
+    \item Transport type information (t\aa g/buss) is shown for each station
+\end{itemize}
+
+\subsection{US5: Timetables}
+\textbf{User Story:} As a traveler, I want to view timetables for specific bus and train lines, so that I can plan recurring trips.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The timetables page displays the heading ``Tidtabeller''
+    \item Clickable links are available to access specific line timetables
+\end{itemize}
+
+\subsection{US6: Ticket Information}
+\textbf{User Story:} As a traveler, I want to view available ticket types and their details, so that I can choose the best ticket for my needs.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The tickets page displays all five ticket types: Enkelbiljett, Flexbiljett, 24-timmarsbiljett, 30-dagarsbiljett, and 365-dagarsbiljett
+    \item Each ticket type has a link to detailed information
+\end{itemize}
+
+\subsection{US7: Zone Information}
+\textbf{User Story:} As a traveler, I want to view zone information, so that I can understand the fare zones for my journey.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The zones page has sub-section headings
+    \item Zone maps in PDF or image format are available for download
+\end{itemize}
+
+\subsection{US8: Customer Service}
+\textbf{User Story:} As a user, I want to access customer service resources, so that I can get help when needed.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The customer service page displays a heading
+    \item Links to all main service sections are present: FAQ (Vanliga fr\aa gor), delay compensation (F\"orseningsers\"attning), lost and found (Hittegods), and contact (Kontakta oss)
+\end{itemize}
+
+\subsection{US9: Navigation Menu}
+\textbf{User Story:} As a user, I want to navigate between main sections of the website using the menu, so that I can easily find the information I need.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The main navigation contains links to Biljetter, Reseinformation, and Kundservice
+    \item Clicking each link navigates to the correct section with the expected URL path
+\end{itemize}
+
+\subsection{US10: Accessibility Information}
+\textbf{User Story:} As a traveler with accessibility needs, I want to view accessibility information, so that I can plan accessible trips.
+
+\textbf{Acceptance Criteria:}
+\begin{itemize}
+    \item The accessibility page contains information for all three transport types (Buss, T\aa g, B\aa t)
+    \item Accessibility statement links are present
+\end{itemize}
+
+% ============================================
+% SECTION 3: DEVELOPMENT AND EXECUTION TIMES
+% ============================================
+\section{Development and Execution Times}
+
+Table~\ref{tab:times} presents the development time and execution time for each user story.
+
+\begin{table}[h!]
+\centering
+\caption{Development and execution times per user story}
+\label{tab:times}
+\small
+\begin{tabular}{|l|l|c|c|c|}
+\hline
+\textbf{\#} & \textbf{User Story} & \textbf{Tests} & \textbf{Dev Time} & \textbf{Exec Time} \\
+\hline
+US1 & Journey Planning & 1 & 45 min & 2 s \\
+US2 & Extended Journey Search & 2 & 40 min & 4 s \\
+US3 & Traffic Information & 2 & 25 min & 4 s \\
+US4 & Stop/Station Search & 4 & 45 min & 7 s \\
+US5 & Timetables & 2 & 25 min & 4 s \\
+US6 & Ticket Information & 5 & 30 min & 9 s \\
+US7 & Zone Information & 2 & 25 min & 3 s \\
+US8 & Customer Service & 2 & 20 min & 4 s \\
+US9 & Navigation Menu & 3 & 25 min & 7 s \\
+US10 & Accessibility Info & 2 & 25 min & 4 s \\
+\hline
+\multicolumn{2}{|l|}{\textbf{Project setup \& infrastructure}} & -- & 2 h & -- \\
+\hline
+\multicolumn{2}{|l|}{\textbf{Total}} & \textbf{25} & \textbf{$\sim$7 h} & \textbf{$\sim$58 s} \\
+\hline
+\end{tabular}
+\end{table}
+
+% ============================================
+% SECTION 4: TEST EXECUTION RESULTS
+% ============================================
+\section{Test Execution Results}
+
+All 25 test cases executed successfully. The following log shows the full test run output.
+
+\begin{lstlisting}[style=testlog]
+$ dotnet test --logger "console;verbosity=detailed"
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  BlekingetrafikenTests -> bin/Debug/net8.0/BlekingetrafikenTests.dll
+Test run for BlekingetrafikenTests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.11.1 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+NUnit Adapter 4.5.0.0: Test execution started
+Running all tests in BlekingetrafikenTests.dll
+   NUnit3TestExecutor discovered 25 of 25 NUnit test cases using Current Discovery mode, Non-Explicit run
+  Passed JourneyPlanner_ShouldBeDisplayedWithTimeSelection [2 s]
+  Passed JourneyResults_ExtendedSearchPageShouldExist [1 s]
+  Passed JourneyResults_FormFieldsShouldBePresent [3 s]
+  Passed TrafficInfo_ShouldContainDisruptionContent [2 s]
+  Passed TrafficInfo_ShouldHaveTrafikverketLink [2 s]
+  Passed Stations_ShouldDisplayKnownStation("Karlskrona") [2 s]
+  Passed Stations_ShouldDisplayKnownStation("Ronneby") [2 s]
+  Passed Stations_ShouldListMultipleStations [2 s]
+  Passed Stations_ShouldShowTransportTypeInfo [1 s]
+  Passed Timetables_ShouldDisplayCorrectHeading [2 s]
+  Passed Timetables_ShouldHaveTimetableLinks [2 s]
+  Passed Tickets_ShouldDisplaySpecificTicketType("Enkelbiljett") [2 s]
+  Passed Tickets_ShouldDisplaySpecificTicketType("Flexbiljett") [2 s]
+  Passed Tickets_ShouldDisplaySpecificTicketType("24-timmarsbiljett") [1 s]
+  Passed Tickets_ShouldDisplaySpecificTicketType("30-dagarsbiljett") [2 s]
+  Passed Tickets_ShouldDisplaySpecificTicketType("365-dagarsbiljett") [2 s]
+  Passed Zones_ShouldHaveDownloadableContent [1 s]
+  Passed Zones_ShouldHaveSubSections [2 s]
+  Passed CustomerService_ShouldDisplayHeading [2 s]
+  Passed CustomerService_ShouldHaveAllServiceLinks [2 s]
+  Passed Navigation_BiljettLink_ShouldNavigateToTicketsPage [2 s]
+  Passed Navigation_KundserviceLink_ShouldNavigateToCustomerServicePage [2 s]
+  Passed Navigation_ReseinformationLink_ShouldNavigateToTravelInfoPage [3 s]
+  Passed Accessibility_ShouldHaveAccessibilityStatementLinks [2 s]
+NUnit Adapter 4.5.0.0: Test execution complete
+  Passed Accessibility_ShouldHaveAllTransportSections [2 s]
+
+Test Run Successful.
+Total tests: 25
+     Passed: 25
+ Total time: 58.5132 Seconds
+\end{lstlisting}
+
+Figure~\ref{fig:test-results} shows the test execution in the IDE test runner from a separate run. Small differences in execution time between runs are expected due to network and server response times.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/test_results.png}
+    \caption{Screenshot of successful test execution (25/25 passed)}
+    \label{fig:test-results}
+\end{figure}
+
+% ============================================
+% SECTION 5: QUALITY DISCUSSION (MAX 2 PAGES)
+% ============================================
+\section{Test Suite Quality and Discussion}
+
+\subsection{Quality Practices}
+
+The test suite is built to be easy to maintain and reliable. The following practices are used:
+
+\begin{itemize}
+    \item Each page has its own Page Object class that holds all locators and actions. When the website HTML changes, only that page class needs to be updated.
+    \item Every test opens a fresh browser via \texttt{[SetUp]} and closes it in \texttt{[TearDown]}. This stops tests from affecting each other.
+    \item \texttt{WebDriverWait} with expected conditions is used instead of \texttt{Thread.Sleep}. This makes tests faster and more stable.
+    \item NUnit's \texttt{[TestCase]} runs the same test with different inputs (e.g., US4 checks two stations, US6 checks five ticket types) without repeating test code.
+    \item All URLs are stored in a single \texttt{TestConfig} class and browser settings in \texttt{DriverFactory}. Changes only need to be made in one file.
+    \item The Cookiebot banner is closed once in a shared base class, so each test does not need to handle it.
+\end{itemize}
+
+\subsection{Benefits of Script-Based GUI Testing}
+
+\begin{itemize}
+    \item Tests check the application from the user's point of view. They can find issues that unit or API tests miss, such as broken links, missing content, or navigation problems.
+    \item The full suite runs in about one minute. This is much faster than manually checking 25 scenarios across 10 pages.
+    \item Tests act as living documentation. A failing test shows right away which feature broke, which is useful for regression testing after website updates.
+    \item Running against the live production site can find real issues that a test environment might not show.
+\end{itemize}
+
+\subsection{Drawbacks of Script-Based GUI Testing}
+
+\begin{itemize}
+    \item Changes to CSS selectors, page layout, or the cookie consent banner can break tests even when the actual features still work. POM reduces this problem but does not remove it fully.
+    \item Tests against a live website are affected by network speed, server load, and content changes that the tester cannot control.
+    \item Each test opens a new browser, loads the page, waits, and closes. This is much slower than unit tests.
+    \item GUI tests can only check what is visible on the page. They cannot test backend logic, database state, or API responses directly.
+\end{itemize}
+
+This suite focuses on checking that content is present and that pages are structured correctly. It does not test full user workflows. For example, it checks that the journey planner form exists but does not submit a search and check the results. It also does not cover responsive design, mobile views, or other browsers. All tests run only in desktop Chrome.
+
+\end{document}
