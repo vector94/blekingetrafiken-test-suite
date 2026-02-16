@@ -24,7 +24,7 @@ namespace BlekingetrafikenTests.Tests
             // Arrange
             _homePage.Open();
 
-            // Act - Verify the form has both From and To labels (needed to produce results)
+            // Act
             var fromLabels = Driver.FindElements(By.XPath("//*[contains(text(), 'Från')]"));
             var toLabels = Driver.FindElements(By.XPath("//*[contains(text(), 'Till')]"));
             var searchButtons = Driver.FindElements(By.XPath("//button[contains(text(), 'Sök')] | //input[@value='Sök']"));
@@ -42,13 +42,11 @@ namespace BlekingetrafikenTests.Tests
         [Description("Verify that the extended search page exists and provides journey search direction")]
         public void JourneyResults_ExtendedSearchPageShouldExist()
         {
-            // Arrange & Act - Navigate to the extended search page
+            // Arrange & Act
             Driver.Navigate().GoToUrl(TestConfig.BaseUrl + "/reseinformation/sok-resa/");
-
-            // The page should load successfully (not 404)
             string pageSource = Driver.PageSource.ToLower();
 
-            // Assert - Page loads and contains journey-search-related content
+            // Assert
             Assert.Multiple(() =>
             {
                 Assert.That(Driver.Title, Is.Not.Empty, "The extended search page should load with a title");

@@ -10,6 +10,7 @@ TestResults/
 *.log
 *.out
 *.pdf
+!Report/report.pdf
 *.synctex.gz
 *.fls
 *.fdb_latexmk

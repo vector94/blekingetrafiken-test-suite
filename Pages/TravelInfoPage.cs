@@ -3,13 +3,8 @@ using BlekingetrafikenTests.Utils;
 
 namespace BlekingetrafikenTests.Pages
 {
-    /// <summary>
-    /// Page Object for the Travel Information (Reseinformation) section.
-    /// Provides access to timetables, stations, zones, traffic info, and accessibility.
-    /// </summary>
     public class TravelInfoPage : BasePage
     {
-        // Sub-section links confirmed from web scraping
         private readonly By _timetablesLink = By.CssSelector("a[href*='/reseinformation/tidtabeller/']");
         private readonly By _stationsLink = By.CssSelector("a[href*='/reseinformation/stationer/']");
         private readonly By _zonesLink = By.CssSelector("a[href*='/reseinformation/zoner/']");
@@ -59,9 +54,6 @@ namespace BlekingetrafikenTests.Pages
             link.Click();
         }
 
-        /// <summary>
-        /// Checks that all expected sub-section links are present.
-        /// </summary>
         public bool HasAllSubSectionLinks()
         {
             return IsElementDisplayed(_timetablesLink)

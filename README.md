@@ -7,7 +7,7 @@ Automated GUI-based regression test suite for [Blekingetrafiken.se](https://www.
 - **Language:** C# (.NET 8.0)
 - **Test Framework:** NUnit 3
 - **Browser Automation:** Selenium WebDriver 4.40
-- **Browser:** Google Chrome (ChromeDriver managed automatically by Selenium)
+- **Browser:** Google Chrome
 
 ## Prerequisites
 
@@ -42,8 +42,9 @@ After running with `--settings .runsettings`, results are saved in `./TestResult
 ```
 BlekingetrafikenTests/
 ├── Pages/          # Page Object Model classes (one per page)
-├── Tests/          # Test classes (one per user story, US01–US10)
+├── Tests/          # Test classes (one per user story, US01-US10)
 ├── Utils/          # Shared utilities (driver setup, waits, config)
+├── Report/         # LaTeX report source and PDF
 ├── .runsettings    # NUnit run configuration
 └── BlekingetrafikenTests.csproj
 ```
@@ -56,15 +57,14 @@ BlekingetrafikenTests/
 - **Explicit Waits:** `WaitHelper` uses WebDriverWait instead of Thread.Sleep for reliable, non-flaky element interaction.
 - **Centralized Configuration:** All URLs are defined in `TestConfig.cs` — changing the base URL updates all tests.
 - **Data-Driven Testing:** `[TestCase]` attributes parameterize tests (e.g., verifying each ticket type, station name).
-- **Annotations:** Every test class and method has `[Description]`, `[Category]`, and XML doc comments.
-- **Modularization:** Reusable methods (cookie handling, scrolling, element checks) live in base/utility classes.
+- **Annotations:** Every test class and method has `[Description]` and `[Category]` attributes.
 
 ## User Stories Covered
 
 | # | User Story | Test File | Tests |
 |---|-----------|-----------|-------|
 | US1 | Journey Planning | US01_JourneyPlanningTests.cs | 1 |
-| US2 | Journey Results | US02_JourneyResultsTests.cs | 2 |
+| US2 | Extended Journey Search | US02_JourneyResultsTests.cs | 2 |
 | US3 | Traffic Information | US03_TrafficInfoTests.cs | 2 |
 | US4 | Stop Search | US04_StopSearchTests.cs | 4 |
 | US5 | Timetables | US05_TimetablesTests.cs | 2 |

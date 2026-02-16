@@ -23,7 +23,7 @@ namespace BlekingetrafikenTests.Tests
             // Act
             string heading = _customerServicePage.GetMainHeading();
 
-            // Assert - The heading is "Hej! Vad kan vi hjälpa dig med?"
+            // Assert
             Assert.That(heading, Is.Not.Empty,
                 "The customer service page should display a heading");
         }

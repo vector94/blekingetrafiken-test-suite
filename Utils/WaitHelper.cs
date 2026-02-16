@@ -4,10 +4,6 @@ using SeleniumExtras.WaitHelpers;
 
 namespace BlekingetrafikenTests.Utils
 {
-    /// <summary>
-    /// Provides explicit wait utilities to avoid brittle Thread.Sleep calls.
-    /// All waits use WebDriverWait with configurable timeouts.
-    /// </summary>
     public static class WaitHelper
     {
         private const int DefaultTimeoutSeconds = 15;

@@ -3,10 +3,6 @@ using BlekingetrafikenTests.Utils;
 
 namespace BlekingetrafikenTests.Pages
 {
-    /// <summary>
-    /// Page Object for the Customer Service (Kundservice) page.
-    /// Contains FAQ, delay compensation, lost and found, and contact links.
-    /// </summary>
     public class CustomerServicePage : BasePage
     {
         private readonly By _faqLink = By.CssSelector("a[href*='/kundservice/fragor-och-svar/']");
@@ -30,9 +26,6 @@ namespace BlekingetrafikenTests.Pages
 
         public bool HasContactLink() => IsElementDisplayed(_contactLink);
 
-        /// <summary>
-        /// Checks that all main customer service sub-sections are present.
-        /// </summary>
         public bool HasAllServiceLinks()
         {
             return HasFaqLink()
@@ -41,9 +34,6 @@ namespace BlekingetrafikenTests.Pages
                 && HasContactLink();
         }
 
-        /// <summary>
-        /// Navigates to the FAQ page.
-        /// </summary>
         public void NavigateToFaq()
         {
             var link = WaitHelper.WaitForClickable(Driver, _faqLink);

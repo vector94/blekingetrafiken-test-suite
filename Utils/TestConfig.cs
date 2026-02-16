@@ -1,9 +1,5 @@
 namespace BlekingetrafikenTests.Utils
 {
-    /// <summary>
-    /// Centralized configuration for the test suite.
-    /// All URLs and test constants are defined here for easy maintenance.
-    /// </summary>
     public static class TestConfig
     {
         public const string BaseUrl = "https://www.blekingetrafiken.se";
