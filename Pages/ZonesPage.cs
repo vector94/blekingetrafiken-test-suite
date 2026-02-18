@@ -27,9 +27,9 @@ namespace BlekingetrafikenTests.Pages
 
         public bool HasDownloadableContent()
         {
-            var pdfLinks = Driver.FindElements(By.CssSelector("a[href*='.pdf'], a[href*='pdf'], a[href*='karta']"));
-            var images = Driver.FindElements(By.CssSelector("img"));
-            return pdfLinks.Count > 0 || images.Count > 1;
+            var pdfLinks = Driver.FindElements(By.CssSelector("a[href*='.pdf'], a[href*='karta']"));
+            var zoneImages = Driver.FindElements(By.CssSelector("img[src*='zon'], img[alt*='zon'], img[src*='karta'], img[alt*='karta']"));
+            return pdfLinks.Count > 0 || zoneImages.Count > 0;
         }
 
         public bool PageContainsText(string text)

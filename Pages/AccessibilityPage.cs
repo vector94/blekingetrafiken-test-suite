@@ -6,7 +6,7 @@ namespace BlekingetrafikenTests.Pages
     public class AccessibilityPage : BasePage
     {
         private readonly By _webAccessibilityLink = By.CssSelector(
-            "a[href*='tillganglighetsredogorelse'], a[href*='tillganglighet'], a[href*='accessibility']"
+            "a[href*='tillganglighetsredogorelse'], a[href*='accessibility']"
         );
 
         public AccessibilityPage(IWebDriver driver) : base(driver) { }

@@ -24,8 +24,10 @@ namespace BlekingetrafikenTests.Tests
             string heading = _customerServicePage.GetMainHeading();
 
             // Assert
-            Assert.That(heading, Is.Not.Empty,
+            Assert.That(heading.Length, Is.GreaterThan(0),
                 "The customer service page should display a heading");
+            Assert.That(Driver.Url, Does.Contain("/kundservice"),
+                "Should be on the customer service page");
         }
 
         [Test]

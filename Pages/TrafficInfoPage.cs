@@ -29,7 +29,7 @@ namespace BlekingetrafikenTests.Pages
         public bool HasDisruptionContent()
         {
             var pageSource = Driver.PageSource.ToLower();
-            return pageSource.Contains("störning") || pageSource.Contains("planerad") || pageSource.Contains("trafik");
+            return pageSource.Contains("störning") || pageSource.Contains("trafikläge") || pageSource.Contains("försening");
         }
     }
 }

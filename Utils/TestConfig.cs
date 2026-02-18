@@ -11,5 +11,6 @@ namespace BlekingetrafikenTests.Utils
         public const string ZonesUrl = BaseUrl + "/reseinformation/zoner/";
         public const string TrafficInfoUrl = BaseUrl + "/reseinformation/trafikinformation/";
         public const string AccessibilityUrl = BaseUrl + "/reseinformation/tillganglighet/";
+        public const string ExtendedSearchUrl = BaseUrl + "/reseinformation/sok-resa/";
     }
 }

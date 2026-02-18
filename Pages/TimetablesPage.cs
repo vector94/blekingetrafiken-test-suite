@@ -21,11 +21,8 @@ namespace BlekingetrafikenTests.Pages
 
         public bool HasTimetableLinks()
         {
-            var links = Driver.FindElements(By.CssSelector("a[href*='pdf'], a[href*='tidtabell'], a[href*='linje']"));
-            if (links.Count > 0) return true;
-
-            var headings = Driver.FindElements(By.TagName("h2"));
-            return headings.Count > 0;
+            var links = Driver.FindElements(By.CssSelector("a[href*='.pdf'], a[href*='tidtabell'], a[href*='linje']"));
+            return links.Count > 0;
         }
     }
 }
